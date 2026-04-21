@@ -183,6 +183,11 @@ export default class FluwxPlugin implements FlutterPlugin, MethodCallHandler, Ab
       this.onLaunchMiniProgramResp(resp);
       return;
     }
+
+    if (resp instanceof wechatSDK.OpenCustomerServiceChatResp) {
+      this.onOpenCustomerServiceChatResp(resp);
+      return;
+    }
   }
 
   // 微信回调 end
@@ -236,6 +241,16 @@ export default class FluwxPlugin implements FlutterPlugin, MethodCallHandler, Ab
     }
 
     this.channel?.invokeMethod("onLaunchMiniProgramResponse", _result);
+  }
+
+  onOpenCustomerServiceChatResp(resp: wechatSDK.OpenCustomerServiceChatResp) {
+    const _result: Map<string, ESObject> = new Map();
+    _result.set(KEY_ERR_CODE, resp.errCode);
+    _result.set(KEY_ERR_STR, resp.errStr);
+    _result.set(KEY_TYPE, resp.type);
+    _result.set(KEY_OPEN_ID, resp.openId);
+
+    this.channel?.invokeMethod("onWXOpenCustomerServiceChatResponse", _result);
   }
 
   async handlePay(call: MethodCall, result: MethodResult) {
