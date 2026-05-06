@@ -5,6 +5,10 @@ inputs:
   working-directory:
     description: directory with-in the repository where the package is located (if not in the repository root)
     required: false
+  shell:
+    description: shell used to run publish commands
+    required: false
+    default: bash
 
 runs:
   using: "composite"
