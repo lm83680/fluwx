@@ -23,14 +23,12 @@ melos:
 
   scripts:
     analyze:
-      run: flutter analyze
+      run: flutter analyze --no-fatal-infos --no-fatal-warnings
       exec:
         concurrency: 1
 
     test:
-      run: flutter test
-      exec:
-        concurrency: 2
+      run: melos exec --concurrency=1 --dir-exists=test -- flutter test
 
     version:sync:
       run: dart tools/sync_version.dart

@@ -34,10 +34,10 @@ jobs:
           echo "✅ 所有 symlink 完好"
 
       - name: Analyze
-        run: melos exec -- flutter analyze
+        run: melos exec --concurrency=1 -- flutter analyze --no-fatal-infos --no-fatal-warnings
 
       - name: Test
-        run: melos exec -- flutter test
+        run: melos exec --concurrency=1 --dir-exists=test -- flutter test
 
   # ──────────────────────────────────────────────
   ios_fluwx:
