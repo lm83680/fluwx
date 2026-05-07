@@ -34,6 +34,10 @@
 - Launch app From wechat link.
 - Open Customer Service
 
+## Development Setup
+
+Please read [DEVELOPMENT.md](./doc/DEVELOPMENT.md) for development setup.
+
 ## Preparation
 
 [Migrate to V4 now](./doc/MIGRATE_TO_V4_CN.md)

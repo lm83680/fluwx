@@ -32,6 +32,10 @@
 - 从微信标签打开应用
 - APP拉起客服微信
 
+## 开发环境搭建
+
+请阅读[DEVELOPMENT_CN.md](./doc/DEVELOPMENT_CN.md) 以了解开发环境搭建。
+
 ## 准备
 
 [迁移到V4指南](./doc/MIGRATE_TO_V4_CN.md)
