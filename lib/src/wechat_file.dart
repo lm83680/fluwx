@@ -24,34 +24,24 @@ const String defaultSuffixTxt = '.txt';
 
 class WeChatFile {
   /// [source] must begin with http or https
-  WeChatFile.network(
-    String this.source, {
-    String? suffix,
-  })  : assert(source.startsWith('http')),
-        schema = FileSchema.network,
-        suffix = source.readSuffix(suffix, defaultSuffixTxt);
+  WeChatFile.network(String this.source, {String? suffix})
+    : assert(source.startsWith('http')),
+      schema = FileSchema.network,
+      suffix = source.readSuffix(suffix, defaultSuffixTxt);
 
   ///[source] path of the image, like '/asset/image.pdf?package=flutter',
   ///the query param package in [source] only available when you want to specify the package of image
-  WeChatFile.asset(
-    String this.source, {
-    String? suffix,
-  })  : assert(source.trim().isNotEmpty),
-        schema = FileSchema.asset,
-        suffix = source.readSuffix(suffix, defaultSuffixTxt);
+  WeChatFile.asset(String this.source, {String? suffix})
+    : assert(source.trim().isNotEmpty),
+      schema = FileSchema.asset,
+      suffix = source.readSuffix(suffix, defaultSuffixTxt);
 
-  WeChatFile.file(
-    File source, {
-    String suffix = defaultSuffixTxt,
-  })  : source = source.path,
-        schema = FileSchema.file,
-        suffix = source.path.readSuffix(suffix, defaultSuffixTxt);
+  WeChatFile.file(File source, {String suffix = defaultSuffixTxt})
+    : source = source.path,
+      schema = FileSchema.file,
+      suffix = source.path.readSuffix(suffix, defaultSuffixTxt);
 
-  WeChatFile.binary(
-    Uint8List this.source, {
-    this.suffix = defaultSuffixTxt,
-  })  : assert(suffix.trim().isNotEmpty),
-        schema = FileSchema.binary;
+  WeChatFile.binary(Uint8List this.source, {this.suffix = defaultSuffixTxt}) : assert(suffix.trim().isNotEmpty), schema = FileSchema.binary;
 
   final dynamic source;
   final FileSchema schema;

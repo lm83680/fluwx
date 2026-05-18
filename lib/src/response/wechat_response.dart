@@ -28,29 +28,18 @@ typedef _WeChatResponseInvoker = WeChatResponse Function(Map argument);
 Map<String, _WeChatResponseInvoker> _nameAndResponseMapper = {
   'onShareResponse': (Map argument) => WeChatShareResponse.fromMap(argument),
   'onAuthResponse': (Map argument) => WeChatAuthResponse.fromMap(argument),
-  'onLaunchMiniProgramResponse': (Map argument) =>
-      WeChatLaunchMiniProgramResponse.fromMap(argument),
+  'onLaunchMiniProgramResponse': (Map argument) => WeChatLaunchMiniProgramResponse.fromMap(argument),
   'onPayResponse': (Map argument) => WeChatPaymentResponse.fromMap(argument),
-  'onSubscribeMsgResp': (Map argument) =>
-      WeChatSubscribeMsgResponse.fromMap(argument),
-  'onWXOpenBusinessWebviewResponse': (Map argument) =>
-      WeChatOpenBusinessWebviewResponse.fromMap(argument),
-  'onAuthByQRCodeFinished': (Map argument) =>
-      WeChatAuthByQRCodeFinishedResponse.fromMap(argument),
-  'onAuthGotQRCode': (Map argument) =>
-      WeChatAuthGotQRCodeResponse.fromMap(argument),
-  'onQRCodeScanned': (Map argument) =>
-      WeChatQRCodeScannedResponse.fromMap(argument),
-  'onWXShowMessageFromWX': (Map argument) =>
-      WeChatShowMessageFromWXRequest.fromMap(argument),
-  'onWXOpenCustomerServiceChatResponse': (Map argument) =>
-      WeChatOpenCustomerServiceChatResponse.fromMap(argument),
-  "onOpenBusinessViewResponse": (Map argument) =>
-      WeChatOpenBusinessViewResponse.fromMap(argument),
-  "onOpenWechatInvoiceResponse": (Map argument) =>
-      WeChatOpenInvoiceResponse.fromMap(argument),
-  "onWXLaunchFromWX": (Map argument) =>
-      WeChatLaunchFromWXRequest.fromMap(argument),
+  'onSubscribeMsgResp': (Map argument) => WeChatSubscribeMsgResponse.fromMap(argument),
+  'onWXOpenBusinessWebviewResponse': (Map argument) => WeChatOpenBusinessWebviewResponse.fromMap(argument),
+  'onAuthByQRCodeFinished': (Map argument) => WeChatAuthByQRCodeFinishedResponse.fromMap(argument),
+  'onAuthGotQRCode': (Map argument) => WeChatAuthGotQRCodeResponse.fromMap(argument),
+  'onQRCodeScanned': (Map argument) => WeChatQRCodeScannedResponse.fromMap(argument),
+  'onWXShowMessageFromWX': (Map argument) => WeChatShowMessageFromWXRequest.fromMap(argument),
+  'onWXOpenCustomerServiceChatResponse': (Map argument) => WeChatOpenCustomerServiceChatResponse.fromMap(argument),
+  "onOpenBusinessViewResponse": (Map argument) => WeChatOpenBusinessViewResponse.fromMap(argument),
+  "onOpenWechatInvoiceResponse": (Map argument) => WeChatOpenInvoiceResponse.fromMap(argument),
+  "onWXLaunchFromWX": (Map argument) => WeChatLaunchFromWXRequest.fromMap(argument),
 };
 
 sealed class WeChatResponse {
@@ -78,20 +67,17 @@ sealed class WeChatResponse {
 class WeChatOpenInvoiceResponse extends WeChatResponse {
   String? cardItemList;
 
-  WeChatOpenInvoiceResponse.fromMap(Map map)
-      : cardItemList = map["cardItemList"],
-        super._(map[_errCode], map[_errStr]);
+  WeChatOpenInvoiceResponse.fromMap(Map map) : cardItemList = map["cardItemList"], super._(map[_errCode], map[_errStr]);
 
   @override
   Record toRecord() {
     return (errCode: errCode, errStr: errStr, cardItemList: cardItemList);
   }
 }
+
 /// The response when sharing finished.
 class WeChatShareResponse extends WeChatResponse {
-  WeChatShareResponse.fromMap(Map map)
-      : type = map['type'],
-        super._(map[_errCode], map[_errStr]);
+  WeChatShareResponse.fromMap(Map map) : type = map['type'], super._(map[_errCode], map[_errStr]);
 
   final int type;
 
@@ -104,12 +90,12 @@ class WeChatShareResponse extends WeChatResponse {
 /// The response when auth finished.
 class WeChatAuthResponse extends WeChatResponse {
   WeChatAuthResponse.fromMap(Map map)
-      : type = map['type'],
-        country = map['country'],
-        lang = map['lang'],
-        code = map['code'],
-        state = map['state'],
-        super._(map[_errCode], map[_errStr]);
+    : type = map['type'],
+      country = map['country'],
+      lang = map['lang'],
+      code = map['code'],
+      state = map['state'],
+      super._(map[_errCode], map[_errStr]);
 
   final int type;
   final String? country;
@@ -119,24 +105,13 @@ class WeChatAuthResponse extends WeChatResponse {
 
   @override
   Record toRecord() {
-    return (
-      errCode: errCode,
-      errStr: errStr,
-      type: type,
-      country: country,
-      lang: lang,
-      code: code,
-      state: state
-    );
+    return (errCode: errCode, errStr: errStr, type: type, country: country, lang: lang, code: code, state: state);
   }
 }
 
 /// The response when launching mini program finished.
 class WeChatLaunchMiniProgramResponse extends WeChatResponse {
-  WeChatLaunchMiniProgramResponse.fromMap(Map map)
-      : type = map['type'],
-        extMsg = map['extMsg'],
-        super._(map[_errCode], map[_errStr]);
+  WeChatLaunchMiniProgramResponse.fromMap(Map map) : type = map['type'], extMsg = map['extMsg'], super._(map[_errCode], map[_errStr]);
 
   final int? type;
   final String? extMsg;
@@ -149,10 +124,7 @@ class WeChatLaunchMiniProgramResponse extends WeChatResponse {
 
 /// The response when payment finished.
 class WeChatPaymentResponse extends WeChatResponse {
-  WeChatPaymentResponse.fromMap(Map map)
-      : type = map['type'],
-        extData = map['extData'],
-        super._(map[_errCode], map[_errStr]);
+  WeChatPaymentResponse.fromMap(Map map) : type = map['type'], extData = map['extData'], super._(map[_errCode], map[_errStr]);
 
   final int type;
   final String? extData;
@@ -165,9 +137,7 @@ class WeChatPaymentResponse extends WeChatResponse {
 
 /// The response when customer service chat finished.
 class WeChatOpenCustomerServiceChatResponse extends WeChatResponse {
-  WeChatOpenCustomerServiceChatResponse.fromMap(Map map)
-      : extMsg = map['extMsg'],
-        super._(map[_errCode], map[_errStr]);
+  WeChatOpenCustomerServiceChatResponse.fromMap(Map map) : extMsg = map['extMsg'], super._(map[_errCode], map[_errStr]);
 
   final String? extMsg;
 
@@ -177,7 +147,6 @@ class WeChatOpenCustomerServiceChatResponse extends WeChatResponse {
   }
 }
 
-
 /// The response when open business view finished.
 class WeChatOpenBusinessViewResponse extends WeChatResponse {
   final String? extMsg;
@@ -186,34 +155,27 @@ class WeChatOpenBusinessViewResponse extends WeChatResponse {
   final int? type;
 
   WeChatOpenBusinessViewResponse.fromMap(Map map)
-      : extMsg = map["extMsg"],
-        openid = map["openid"],
-        businessType = map["businessType"],
-        type = map["type"],
-        super._(map[_errCode], map[_errStr]);
+    : extMsg = map["extMsg"],
+      openid = map["openid"],
+      businessType = map["businessType"],
+      type = map["type"],
+      super._(map[_errCode], map[_errStr]);
 
   @override
   Record toRecord() {
-    return (
-      errCode: errCode,
-      errStr: errStr,
-      type: type,
-      extMsg: extMsg,
-      openid: openid,
-      businessType: businessType
-    );
+    return (errCode: errCode, errStr: errStr, type: type, extMsg: extMsg, openid: openid, businessType: businessType);
   }
 }
 
 /// The response when subscribe message finished.
 class WeChatSubscribeMsgResponse extends WeChatResponse {
   WeChatSubscribeMsgResponse.fromMap(Map map)
-      : openid = map['openid'],
-        templateId = map['templateId'],
-        action = map['action'],
-        reserved = map['reserved'],
-        scene = map['scene'],
-        super._(map[_errCode], map[_errStr]);
+    : openid = map['openid'],
+      templateId = map['templateId'],
+      action = map['action'],
+      reserved = map['reserved'],
+      scene = map['scene'],
+      super._(map[_errCode], map[_errStr]);
 
   final String? openid;
   final String? templateId;
@@ -223,25 +185,17 @@ class WeChatSubscribeMsgResponse extends WeChatResponse {
 
   @override
   Record toRecord() {
-    return (
-      errCode: errCode,
-      errStr: errStr,
-      openid: openid,
-      templateId: templateId,
-      action: action,
-      reserved: reserved,
-      scene: scene
-    );
+    return (errCode: errCode, errStr: errStr, openid: openid, templateId: templateId, action: action, reserved: reserved, scene: scene);
   }
 }
 
 ///   The response when open business webview finished.
 class WeChatOpenBusinessWebviewResponse extends WeChatResponse {
   WeChatOpenBusinessWebviewResponse.fromMap(Map map)
-      : type = map['type'],
-        businessType = map['businessType'],
-        resultInfo = map['resultInfo'],
-        super._(map[_errCode], map[_errStr]);
+    : type = map['type'],
+      businessType = map['businessType'],
+      resultInfo = map['resultInfo'],
+      super._(map[_errCode], map[_errStr]);
 
   final int? type;
   final int? businessType;
@@ -249,42 +203,29 @@ class WeChatOpenBusinessWebviewResponse extends WeChatResponse {
 
   @override
   Record toRecord() {
-    return (
-      errCode: errCode,
-      errStr: errStr,
-      type: type,
-      businessType: businessType,
-      resultInfo: resultInfo
-    );
+    return (errCode: errCode, errStr: errStr, type: type, businessType: businessType, resultInfo: resultInfo);
   }
 }
+
 /// The response when auth by QRCode finished.
 class WeChatAuthByQRCodeFinishedResponse extends WeChatResponse {
   WeChatAuthByQRCodeFinishedResponse.fromMap(Map map)
-      : authCode = map['authCode'],
-        qrCodeErrorCode = (_authByQRCodeErrorCodes[map[_errCode]] ??
-            AuthByQRCodeErrorCode.unknown),
-        super._(map[_errCode], map[_errStr]);
+    : authCode = map['authCode'],
+      qrCodeErrorCode = (_authByQRCodeErrorCodes[map[_errCode]] ?? AuthByQRCodeErrorCode.unknown),
+      super._(map[_errCode], map[_errStr]);
 
   final String? authCode;
   final AuthByQRCodeErrorCode? qrCodeErrorCode;
 
   @override
   Record toRecord() {
-    return (
-      errCode: errCode,
-      errStr: errStr,
-      authCode: authCode,
-      qrCodeErrorCode: qrCodeErrorCode,
-    );
+    return (errCode: errCode, errStr: errStr, authCode: authCode, qrCodeErrorCode: qrCodeErrorCode);
   }
 }
 
 ///[qrCode] in memory.
 class WeChatAuthGotQRCodeResponse extends WeChatResponse {
-  WeChatAuthGotQRCodeResponse.fromMap(Map map)
-      : qrCode = map['qrCode'],
-        super._(map[_errCode], map[_errStr]);
+  WeChatAuthGotQRCodeResponse.fromMap(Map map) : qrCode = map['qrCode'], super._(map[_errCode], map[_errStr]);
 
   final Uint8List? qrCode;
 
@@ -295,8 +236,7 @@ class WeChatAuthGotQRCodeResponse extends WeChatResponse {
 }
 
 class WeChatQRCodeScannedResponse extends WeChatResponse {
-  WeChatQRCodeScannedResponse.fromMap(Map map)
-      : super._(map[_errCode], map[_errStr]);
+  WeChatQRCodeScannedResponse.fromMap(Map map) : super._(map[_errCode], map[_errStr]);
 
   @override
   Record toRecord() {
@@ -312,26 +252,18 @@ class WeChatShowMessageFromWXRequest extends WeChatResponse {
   final String? description;
 
   WeChatShowMessageFromWXRequest.fromMap(Map map)
-      : extMsg = map['extMsg'],
-        country = map['country'],
-        messageAction = map['messageAction'],
-        description = map["description"],
-        lang = map["lang"],
-        super._(0, '');
+    : extMsg = map['extMsg'],
+      country = map['country'],
+      messageAction = map['messageAction'],
+      description = map["description"],
+      lang = map["lang"],
+      super._(0, '');
 
   final String? extMsg;
 
   @override
   Record toRecord() {
-    return (
-      errCode: errCode,
-      errStr: errStr,
-      country: country,
-      lang: lang,
-      messageAction: messageAction,
-      description: description,
-      extMsg: extMsg,
-    );
+    return (errCode: errCode, errStr: errStr, country: country, lang: lang, messageAction: messageAction, description: description, extMsg: extMsg);
   }
 }
 
@@ -342,24 +274,17 @@ class WeChatLaunchFromWXRequest extends WeChatResponse {
   final String? messageAction;
 
   WeChatLaunchFromWXRequest.fromMap(Map map)
-      : extMsg = map['extMsg'],
-        country = map['country'],
-        messageAction = map['messageAction'],
-        lang = map["lang"],
-        super._(0, '');
+    : extMsg = map['extMsg'],
+      country = map['country'],
+      messageAction = map['messageAction'],
+      lang = map["lang"],
+      super._(0, '');
 
   final String? extMsg;
 
   @override
   Record toRecord() {
-    return (
-      errCode: errCode,
-      errStr: errStr,
-      country: country,
-      lang: lang,
-      messageAction: messageAction,
-      extMsg: extMsg,
-    );
+    return (errCode: errCode, errStr: errStr, country: country, lang: lang, messageAction: messageAction, extMsg: extMsg);
   }
 }
 
@@ -372,7 +297,7 @@ enum AuthByQRCodeErrorCode {
   cancel, // WechatAuth_Err_Cancel(-4)
   timeout, // WechatAuth_Err_Timeout(-5)
   authStopped, // WechatAuth_Err_Auth_Stopped(-6), Android only
-  unknown
+  unknown,
 }
 
 const Map<int, AuthByQRCodeErrorCode> _authByQRCodeErrorCodes = {
@@ -381,5 +306,5 @@ const Map<int, AuthByQRCodeErrorCode> _authByQRCodeErrorCodes = {
   -2: AuthByQRCodeErrorCode.networkErr,
   -3: AuthByQRCodeErrorCode.jsonDecodeErr,
   -4: AuthByQRCodeErrorCode.cancel,
-  -5: AuthByQRCodeErrorCode.authStopped
+  -5: AuthByQRCodeErrorCode.authStopped,
 };

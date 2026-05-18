@@ -30,16 +30,16 @@ class Payment extends PayType {
 
   @override
   Map<String, dynamic> get arguments => {
-        'appId': appId,
-        'partnerId': partnerId,
-        'prepayId': prepayId,
-        'packageValue': packageValue,
-        'nonceStr': nonceStr,
-        'timeStamp': timestamp,
-        'sign': sign,
-        'signType': signType,
-        'extData': extData,
-      };
+    'appId': appId,
+    'partnerId': partnerId,
+    'prepayId': prepayId,
+    'packageValue': packageValue,
+    'nonceStr': nonceStr,
+    'timeStamp': timestamp,
+    'sign': sign,
+    'signType': signType,
+    'extData': extData,
+  };
 }
 
 /// request Hong Kong Wallet payment with WeChat.
@@ -50,7 +50,5 @@ class HongKongWallet extends PayType {
   HongKongWallet({required this.prepayId});
 
   @override
-  Map<String, dynamic> get arguments => {
-        'prepayId': prepayId,
-      };
+  Map<String, dynamic> get arguments => {'prepayId': prepayId};
 }

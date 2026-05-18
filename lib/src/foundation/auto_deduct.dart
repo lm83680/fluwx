@@ -21,27 +21,24 @@ class AutoDeduct with _Argument {
     required String timestamp,
     String returnApp = '3',
     this.businessType = 12,
-  })  : queryInfo = {},
-        _detailData = {
-          'appid': appId,
-          'mch_id': mchId,
-          'plan_id': planId,
-          'contract_code': contractCode,
-          'request_serial': requestSerial,
-          'contract_display_account': contractDisplayAccount,
-          'notify_url': notifyUrl,
-          'version': version,
-          'sign': sign,
-          'timestamp': timestamp,
-          'return_app': returnApp,
-          'businessType': businessType
-        };
+  }) : queryInfo = {},
+       _detailData = {
+         'appid': appId,
+         'mch_id': mchId,
+         'plan_id': planId,
+         'contract_code': contractCode,
+         'request_serial': requestSerial,
+         'contract_display_account': contractDisplayAccount,
+         'notify_url': notifyUrl,
+         'version': version,
+         'sign': sign,
+         'timestamp': timestamp,
+         'return_app': returnApp,
+         'businessType': businessType,
+       };
 
-  AutoDeduct.custom({required this.queryInfo, this.businessType = 12})
-      : _detailData = {};
+  AutoDeduct.custom({required this.queryInfo, this.businessType = 12}) : _detailData = {};
 
   @override
-  Map<String, dynamic> get arguments => isV2
-      ? {'queryInfo': queryInfo, 'businessType': businessType}
-      : _detailData;
+  Map<String, dynamic> get arguments => isV2 ? {'queryInfo': queryInfo, 'businessType': businessType} : _detailData;
 }

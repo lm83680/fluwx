@@ -48,22 +48,17 @@ class MethodChannelFluwx extends FluwxPlatform {
     WeChatShareEmojiModel: 'shareEmoji',
   };
 
-  final StreamController<WeChatResponse> _responseEventHandler =
-      StreamController.broadcast();
+  final StreamController<WeChatResponse> _responseEventHandler = StreamController.broadcast();
 
   /// Response answers from WeChat after sharing, payment etc.
   @override
-  Stream<WeChatResponse> get responseEventHandler =>
-      _responseEventHandler.stream;
+  Stream<WeChatResponse> get responseEventHandler => _responseEventHandler.stream;
 
   Future _methodHandler(MethodCall methodCall) {
     if (methodCall.method == "wechatLog") {
       _printLog(methodCall.arguments);
     } else {
-      final response = WeChatResponse.create(
-        methodCall.method,
-        methodCall.arguments,
-      );
+      final response = WeChatResponse.create(methodCall.method, methodCall.arguments);
       _responseEventHandler.add(response);
     }
 
@@ -101,47 +96,28 @@ class MethodChannelFluwx extends FluwxPlatform {
   Future<bool> open(OpenType target) async {
     switch (target) {
       case WeChatApp():
-        return await methodChannel.invokeMethod(
-                'openWXApp', target.arguments) ??
-            false;
+        return await methodChannel.invokeMethod('openWXApp', target.arguments) ?? false;
       case Browser():
-        return await methodChannel.invokeMethod('openUrl', target.arguments) ??
-            false;
+        return await methodChannel.invokeMethod('openUrl', target.arguments) ?? false;
       case RankList():
         return await methodChannel.invokeMethod("openRankList") ?? false;
       case BusinessView():
-        return await methodChannel.invokeMethod(
-                "openBusinessView", target.arguments) ??
-            false;
+        return await methodChannel.invokeMethod("openBusinessView", target.arguments) ?? false;
       case Invoice():
-        return await methodChannel.invokeMethod(
-                "openWeChatInvoice", target.arguments) ??
-            false;
+        return await methodChannel.invokeMethod("openWeChatInvoice", target.arguments) ?? false;
       case CustomerServiceChat():
-        return await methodChannel.invokeMethod(
-                "openWeChatCustomerServiceChat", target.arguments) ??
-            false;
+        return await methodChannel.invokeMethod("openWeChatCustomerServiceChat", target.arguments) ?? false;
       case MiniProgram():
-        return await methodChannel.invokeMethod(
-                'launchMiniProgram', target.arguments) ??
-            false;
+        return await methodChannel.invokeMethod('launchMiniProgram', target.arguments) ?? false;
       case SubscribeMessage():
-        return await methodChannel.invokeMethod(
-            'subscribeMsg', target.arguments);
+        return await methodChannel.invokeMethod('subscribeMsg', target.arguments);
     }
   }
 
   @override
-  Future<bool> registerApi({
-    required String appId,
-    bool doOnIOS = true,
-    bool doOnAndroid = true,
-    String? universalLink,
-  }) async {
+  Future<bool> registerApi({required String appId, bool doOnIOS = true, bool doOnAndroid = true, String? universalLink}) async {
     if (doOnIOS && Platform.isIOS) {
-      if (universalLink == null ||
-          universalLink.trim().isEmpty ||
-          !universalLink.startsWith('https')) {
+      if (universalLink == null || universalLink.trim().isEmpty || !universalLink.startsWith('https')) {
         throw ArgumentError.value(
           universalLink,
           "You're trying to use illegal universal link, see "
@@ -150,12 +126,7 @@ class MethodChannelFluwx extends FluwxPlatform {
         );
       }
     }
-    return await methodChannel.invokeMethod('registerApp', {
-      'appId': appId,
-      'iOS': doOnIOS,
-      'android': doOnAndroid,
-      'universalLink': universalLink
-    });
+    return await methodChannel.invokeMethod('registerApp', {'appId': appId, 'iOS': doOnIOS, 'android': doOnAndroid, 'universalLink': universalLink});
   }
 
   /// Get ext Message
@@ -171,9 +142,7 @@ class MethodChannelFluwx extends FluwxPlatform {
       final channelName = _shareModelMethodMapper[what.runtimeType];
 
       if (channelName == null) {
-        throw ArgumentError.value(
-          '${what.runtimeType} method channel not found',
-        );
+        throw ArgumentError.value('${what.runtimeType} method channel not found');
       }
       return await methodChannel.invokeMethod(channelName, what.arguments);
     }
@@ -184,17 +153,11 @@ class MethodChannelFluwx extends FluwxPlatform {
   Future<bool> authBy(AuthType which) async {
     switch (which) {
       case NormalAuth():
-        return await methodChannel.invokeMethod(
-          'sendAuth',
-          which.arguments,
-        );
+        return await methodChannel.invokeMethod('sendAuth', which.arguments);
       case QRCode():
-        return await methodChannel.invokeMethod(
-                'authByQRCode', which.arguments) ??
-            false;
+        return await methodChannel.invokeMethod('authByQRCode', which.arguments) ?? false;
       case PhoneLogin():
-        return await methodChannel.invokeMethod(
-            'authByPhoneLogin', which.arguments);
+        return await methodChannel.invokeMethod('authByPhoneLogin', which.arguments);
     }
   }
 
@@ -202,19 +165,15 @@ class MethodChannelFluwx extends FluwxPlatform {
   Future<bool> pay(PayType which) async {
     switch (which) {
       case Payment():
-        return await methodChannel.invokeMethod(
-            'payWithFluwx', which.arguments);
+        return await methodChannel.invokeMethod('payWithFluwx', which.arguments);
       case HongKongWallet():
-        return await methodChannel.invokeMethod(
-            'payWithHongKongWallet', which.arguments);
+        return await methodChannel.invokeMethod('payWithHongKongWallet', which.arguments);
     }
   }
 
   @override
   Future<bool> autoDeduct(AutoDeduct data) async {
-    return await methodChannel.invokeMethod(
-            data.isV2 ? "autoDeductV2" : 'autoDeduct', data.arguments) ??
-        false;
+    return await methodChannel.invokeMethod(data.isV2 ? "autoDeductV2" : 'autoDeduct', data.arguments) ?? false;
   }
 
   /// stop [authWeChatByQRCode]
@@ -235,6 +194,5 @@ class MethodChannelFluwx extends FluwxPlatform {
   }
 
   @override
-  Future<bool> get isSupportOpenBusinessView async =>
-      await methodChannel.invokeMethod("checkSupportOpenBusinessView");
+  Future<bool> get isSupportOpenBusinessView async => await methodChannel.invokeMethod("checkSupportOpenBusinessView");
 }

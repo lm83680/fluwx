@@ -4,10 +4,7 @@ import 'package:fluwx/src/method_channel/fluwx_method_channel.dart';
 import 'package:fluwx/src/method_channel/fluwx_platform_interface.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
-class MockFluwxPlatform
-    with MockPlatformInterfaceMixin
-    implements FluwxPlatform {
-
+class MockFluwxPlatform with MockPlatformInterfaceMixin implements FluwxPlatform {
   @override
   Future<String?> getExtMsg() {
     // TODO: implement getExtMsg
@@ -18,20 +15,13 @@ class MockFluwxPlatform
   Future<bool> get isWeChatInstalled => Future.value(false);
 
   @override
-  Future<bool> registerApi(
-      {required String appId,
-      bool doOnIOS = true,
-      bool doOnAndroid = true,
-      String? universalLink}) {
+  Future<bool> registerApi({required String appId, bool doOnIOS = true, bool doOnAndroid = true, String? universalLink}) {
     // TODO: implement registerWxApi
     throw UnimplementedError();
   }
 
   @override
-  Future<bool> sendAuth(
-      {required String scope,
-      String state = 'state',
-      bool nonAutomatic = false}) {
+  Future<bool> sendAuth({required String scope, String state = 'state', bool nonAutomatic = false}) {
     // TODO: implement sendAuth
     throw UnimplementedError();
   }
@@ -69,7 +59,14 @@ class MockFluwxPlatform
   }
 
   @override
-  Future<bool> authByQRCode({required String appId, required String scope, required String nonceStr, required String timestamp, required String signature, String? schemeData}) {
+  Future<bool> authByQRCode({
+    required String appId,
+    required String scope,
+    required String nonceStr,
+    required String timestamp,
+    required String signature,
+    String? schemeData,
+  }) {
     // TODO: implement authByQRCode
     throw UnimplementedError();
   }
@@ -101,7 +98,6 @@ class MockFluwxPlatform
     // TODO: implement selfCheck
     throw UnimplementedError();
   }
-
 }
 
 void main() {

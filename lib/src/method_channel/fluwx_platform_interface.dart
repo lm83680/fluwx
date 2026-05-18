@@ -54,12 +54,7 @@ abstract class FluwxPlatform extends PlatformInterface {
     throw UnimplementedError('open() has not been implemented.');
   }
 
-  Future<bool> registerApi({
-    required String appId,
-    bool doOnIOS = true,
-    bool doOnAndroid = true,
-    String? universalLink,
-  }) {
+  Future<bool> registerApi({required String appId, bool doOnIOS = true, bool doOnAndroid = true, String? universalLink}) {
     throw UnimplementedError('registerWxApi() has not been implemented.');
   }
 
@@ -71,17 +66,11 @@ abstract class FluwxPlatform extends PlatformInterface {
     throw UnimplementedError('share() has not been implemented.');
   }
 
-  Future<bool> sendAuth(
-      {required String scope,
-      String state = 'state',
-      bool nonAutomatic = false}) {
+  Future<bool> sendAuth({required String scope, String state = 'state', bool nonAutomatic = false}) {
     throw UnimplementedError('sendAuth() has not been implemented.');
   }
 
-  Future<bool> authByPhoneLogin({
-    required String scope,
-    String state = 'state',
-  }) async {
+  Future<bool> authByPhoneLogin({required String scope, String state = 'state'}) async {
     throw UnimplementedError('authByPhoneLogin() has not been implemented.');
   }
 
@@ -97,8 +86,7 @@ abstract class FluwxPlatform extends PlatformInterface {
   }
 
   Future<bool> stopAuthByQRCode() async {
-    throw UnimplementedError(
-        'stopWeChatAuthByQRCode() has not been implemented.');
+    throw UnimplementedError('stopWeChatAuthByQRCode() has not been implemented.');
   }
 
   Future<bool> pay(PayType which) {
@@ -114,8 +102,7 @@ abstract class FluwxPlatform extends PlatformInterface {
   }
 
   Future<void> attemptToResumeMsgFromWx() {
-    throw UnimplementedError(
-        'attemptToResumeMsgFromWx() has not been implemented.');
+    throw UnimplementedError('attemptToResumeMsgFromWx() has not been implemented.');
   }
 
   Future<void> selfCheck() {
@@ -123,7 +110,6 @@ abstract class FluwxPlatform extends PlatformInterface {
   }
 
   Future<bool> get isSupportOpenBusinessView async {
-    throw UnimplementedError(
-        'isSupportOpenBusinessView() has not been implemented.');
+    throw UnimplementedError('isSupportOpenBusinessView() has not been implemented.');
   }
 }

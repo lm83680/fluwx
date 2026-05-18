@@ -43,8 +43,7 @@ class Fluwx {
     }
   }
 
-  Future<bool> get isWeChatInstalled =>
-      FluwxPlatform.instance.isWeChatInstalled;
+  Future<bool> get isWeChatInstalled => FluwxPlatform.instance.isWeChatInstalled;
 
   /// Open given target. See [OpenType] for more details
   Future<bool> open({required OpenType target}) {
@@ -56,17 +55,8 @@ class Fluwx {
   /// if [doOnIOS] is true ,fluwx will register WXApi on iOS.
   /// if [doOnAndroid] is true, fluwx will register WXApi on Android.
   /// [universalLink] is required if you want to register on iOS.
-  Future<bool> registerApi({
-    required String appId,
-    bool doOnIOS = true,
-    bool doOnAndroid = true,
-    String? universalLink,
-  }) async {
-    return FluwxPlatform.instance.registerApi(
-        appId: appId,
-        doOnAndroid: doOnAndroid,
-        doOnIOS: doOnIOS,
-        universalLink: universalLink);
+  Future<bool> registerApi({required String appId, bool doOnIOS = true, bool doOnAndroid = true, String? universalLink}) async {
+    return FluwxPlatform.instance.registerApi(appId: appId, doOnAndroid: doOnAndroid, doOnIOS: doOnIOS, universalLink: universalLink);
   }
 
   /// Share your requests to WeChat.
@@ -88,8 +78,7 @@ class Fluwx {
     return FluwxPlatform.instance.autoDeduct(data);
   }
 
-  Future<bool> get isSupportOpenBusinessView async =>
-      await FluwxPlatform.instance.isSupportOpenBusinessView;
+  Future<bool> get isSupportOpenBusinessView async => await FluwxPlatform.instance.isSupportOpenBusinessView;
 
   Future<String?> getExtMsg() async {
     return FluwxPlatform.instance.getExtMsg();
@@ -116,9 +105,11 @@ class Fluwx {
   /// Add a subscriber to subscribe responses from WeChat
   FluwxCancelable addSubscriber(WeChatResponseSubscriber listener) {
     _responseListeners.add(listener);
-    return FluwxCancelableImpl(onCancel: () {
-      removeSubscriber(listener);
-    });
+    return FluwxCancelableImpl(
+      onCancel: () {
+        removeSubscriber(listener);
+      },
+    );
   }
 
   /// remove your subscriber from WeChat

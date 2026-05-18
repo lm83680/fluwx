@@ -1,16 +1,27 @@
-# Monorepo workspace root — 仅包含 dev 依赖，不发布到 pub.dev
-name: fluwx_workspace
-publish_to: none
+name: fluwx
+description: The capability of implementing WeChat SDKs in Flutter. With Fluwx, developers can use WeChatSDK easily, such as sharing, payment, lanuch mini program and etc.
+version: 6.0.0-preview.7
+homepage: https://github.com/OpenFlutter/fluwx
 
 environment:
-  sdk: ^3.10.0
+  sdk: ^3.9.0
+  flutter: ">=3.35.0"
 
 workspace:
-  - packages/fluwx
   - packages/fluwx_no_pay
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_web_plugins:
+    sdk: flutter
+  plugin_platform_interface: ^2.0.2
 
 dev_dependencies:
   melos: ^7.5.1
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
   yaml: ^3.1.2
   yaml_writer: ^2.0.0
 
@@ -72,3 +83,14 @@ melos:
     publish:all:
       run: melos publish --no-dry-run --yes
       description: "先发 fluwx，再发 fluwx_no_pay"
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: com.jarvan.fluwx
+        pluginClass: FluwxPlugin
+      ios:
+        pluginClass: FluwxPlugin
+      ohos:
+        pluginClass: FluwxPlugin

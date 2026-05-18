@@ -15,13 +15,10 @@ class NormalAuth extends AuthType {
   final String state;
   final bool nonAutomatic;
 
-  NormalAuth(
-      {required this.scope, this.state = 'state', this.nonAutomatic = false})
-      : assert(scope.trim().isNotEmpty);
+  NormalAuth({required this.scope, this.state = 'state', this.nonAutomatic = false}) : assert(scope.trim().isNotEmpty);
 
   @override
-  Map<String, dynamic> get arguments =>
-      {'scope': scope, 'state': state, 'nonAutomatic': nonAutomatic};
+  Map<String, dynamic> get arguments => {'scope': scope, 'state': state, 'nonAutomatic': nonAutomatic};
 }
 
 /// Sometimes WeChat  is not installed on users's devices.However we can
@@ -37,28 +34,22 @@ class QRCode extends AuthType {
   final String signature;
   final String? schemeData;
 
-  QRCode({
-    required this.appId,
-    required this.scope,
-    required this.nonceStr,
-    required this.timestamp,
-    required this.signature,
-    this.schemeData,
-  })  : assert(appId.isNotEmpty),
-        assert(scope.isNotEmpty),
-        assert(nonceStr.isNotEmpty),
-        assert(timestamp.isNotEmpty),
-        assert(signature.isNotEmpty);
+  QRCode({required this.appId, required this.scope, required this.nonceStr, required this.timestamp, required this.signature, this.schemeData})
+    : assert(appId.isNotEmpty),
+      assert(scope.isNotEmpty),
+      assert(nonceStr.isNotEmpty),
+      assert(timestamp.isNotEmpty),
+      assert(signature.isNotEmpty);
 
   @override
   Map<String, dynamic> get arguments => {
-        'appId': appId,
-        'scope': scope,
-        'nonceStr': nonceStr,
-        'timeStamp': timestamp,
-        'signature': signature,
-        'schemeData': schemeData
-      };
+    'appId': appId,
+    'scope': scope,
+    'nonceStr': nonceStr,
+    'timeStamp': timestamp,
+    'signature': signature,
+    'schemeData': schemeData,
+  };
 }
 
 /// Currently only support iOS
@@ -66,10 +57,7 @@ class PhoneLogin extends AuthType {
   final String scope;
   final String state;
 
-  PhoneLogin({
-    required this.scope,
-    this.state = 'state',
-  });
+  PhoneLogin({required this.scope, this.state = 'state'});
 
   @override
   Map<String, dynamic> get arguments => {'scope': scope, 'state': state};
