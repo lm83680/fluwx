@@ -34,11 +34,15 @@
 - Launch app From wechat link.
 - Open Customer Service
 
+## Development Setup
+
+Please read [DEVELOPMENT.md](./doc/DEVELOPMENT.md) for development setup.
+
 ## Preparation
 
-[Migrate to V4 now](./doc/MIGRATE_TO_V4_CN.md)
+[Migrate to V6 now](./doc/MIGRATE_TO_V6.md)
 
-> Breaking changes ：*Fluwx* won't request permission(WRITE_EXTERNAL_STORAGE) since 4.5.0. That means you will need to handle permission when sharing images, if FileProvider is not supported.
+> NOTE: V6 has a lot of breaking changes, especially for iOS, such as supporting scene_delegate and Swift Package Manager. Please read the document carefully before migrating to V6.
 
 `Fluwx` is good but not God. You'd better read [official documents](https://developers.weixin.qq.com/doc/oplatform/Mobile_App/Resource_Center_Homepage.html) before
 integrating `Fluwx`. Then you'll understand how to generate Android signature, what's universal link for iOS, how to add URL schema for iOS and so on.
@@ -60,11 +64,9 @@ dependencies:
 > Never forget to replace ^${latestVersion} with an actual version!<br />
 > (See the above version, or go to [versions](https://pub.dev/packages/fluwx/versions) on pub.dev)
 
-> [!NOTE]
-> `fluwx` without pay:<br/>
-> Developers who need to exclude payment for iOS can set `no_pay: true` in the `fluwx` section of `pubspec.yaml`.<br/>
-> See the example: [example/pubspec.yaml](./example/pubspec.yaml#L19)<br/>
 
+> [!WARNING]
+> For no_pay version, you switch to `fluwx_no_pay` package, which is a separate package without payment features.
 ## Configurations
 
 `Fluwx` enables multiple configurations in the section `fluwx` of `pubspec.yaml` from v4, you can reference [pubspec.yaml](./example/pubspec.yaml#L10)
@@ -73,23 +75,9 @@ for more details.
 > For iOS, some configurations, such as url_scheme，universal_link, LSApplicationQueriesSchemes, can be configured by `fluwx`,
 > what you need to do is to fill configurations in `pubspec.yaml`
 
-- app_id. Recommend. It'll be used to generate scheme on iOS。This is not used to init WeChat SDK so you still need to call `fluwx.registerApi` manually.
+- app_id. This is not used to init WeChat SDK so you still need to call `fluwx.registerApi` manually.
 - debug_logging. Optional. Enable logs by setting it `true`.
 - flutter_activity. Optional. This is usually used by cold boot from WeChat on Android. `Fluwx` will try to launch launcher activity if not set.
-- universal_link. Recommend for iOS. It'll be used to generate universal link on your projects.
-- scene_delegate. Optional. Use `AppDelegate` or `SceneDelegate`. See [official documents](https://developers.weixin.qq.com/doc/oplatform/Mobile_App/Access_Guide/iOS.html) for more details.
-
-- For iOS
- If you are failing `cannot load such file -- plist` on iOS, please do the following steps:
-
-```shell
-# step.1 install missing dependencies
-sudo gem install plist
-# step.2 enter iOS folder(example/ios/,ios/)
-cd example/ios/
-# step.3 execute
-pod install
-```
 
 - On OpenHarmony, to check if WeChat is installed, add the following to the module.json5 in your project
 

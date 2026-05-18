@@ -32,11 +32,15 @@
 - 从微信标签打开应用
 - APP拉起客服微信
 
+## 开发环境搭建
+
+请阅读[DEVELOPMENT_CN.md](./doc/DEVELOPMENT_CN.md) 以了解开发环境搭建。
+
 ## 准备
 
-[迁移到V4指南](./doc/MIGRATE_TO_V4_CN.md)
+[现在迁移到V6](./doc/MIGRATE_TO_V6.md)
 
-> 破坏性更新 ：从4.5.0起，当分享图片到微信时，如果不支持FileProvider方式分享，Fluwx不再尝试申请WRITE_EXTERNAL_STORAGE权限，这意味着你需要自己处理权限问题。
+> 注意：V6有很多破坏性更新，尤其是iOS方面，如支持scene_delegate和Swift Package Manager。请在迁移到V6之前仔细阅读文档。
 
 `Fluwx` 可以做很多工作但不是所有. 在集成之前，最好读一下[官方文档](https://developers.weixin.qq.com/doc/oplatform/Mobile_App/Resource_Center_Homepage.html).  
  然后你才知道怎么生成签名，怎么使用universal link以及怎么添加URL schema等.
@@ -56,10 +60,8 @@ dependencies:
 > 别忘记替换 ^${latestVersion} ！为 `fluwx` 的发布版本！<br />
 > （参考上面的版本号，或pub.dev 上的 [versions](https://pub-web.flutter-io.cn/packages/fluwx/versions)）
 
-> [!NOTE]
-> 不带支付的 `fluwx`:<br/>
-> 一些开发者并不需要在 iOS 端使用支付能力，此时您只需要在 pubspec.yaml 的 `fluwx` 部分设置 `no_pay: true` 来去除支付能力。<br/>
-> 参考文件：[example/pubspec.yaml](./example/pubspec.yaml#L19)<br/>
+> [!WARNING]
+> 对于不需要支付功能的版本，你可以切换到`fluwx_no_pay`包，这是一个独立的包，没有支付功能。
 
 ## 配置
 
@@ -68,23 +70,9 @@ dependencies:
 > V4开始，iOS中的url_scheme，universal_link, LSApplicationQueriesSchemes可以不必开发者手动配动。只需在`pubspec.yaml`
 > 中填写即可。
 
-- app_id. 推荐. 它将用于生成iOS的url_scheme。这并不会替你初始化微信SDK，所以你还是自己调用`fluwx.registerApi`。
+- app_id。这并不会替你初始化微信SDK，所以你还是自己调用`fluwx.registerApi`。
 - debug_logging. 可选. 把它设置成`true`可以开启日志。
 - flutter_activity. 可选. 这个通常是用于Android的冷启动。如果不设置任何值，`Fluwx`将尝试启动launcher activity.
-- universal_link. iOS 推荐. 它将用自动配置universal_link。
-- scene_delegate. iOS 可选. 使用 `AppDelegate` 还是使用 `SceneDelegate`. 查阅[官方文档](https://developers.weixin.qq.com/doc/oplatform/Mobile_App/Access_Guide/iOS.html)了解更多.
-
-- For iOS
-如果你在iOS上遇到了 `cannot load such file -- plist`, 请按照以下步骤进行操作：
-
-```shell
-# step.1 安装必要依赖
-sudo gem install plist
-# step.2 进行iOS文件夹(example/ios/,ios/)
-cd example/ios/
-# step.3 执行脚本
-pod install
-```
 
 - 在 OpenHarmony 上，要检查微信是否已安装，请在项目的 module.json5 中添加以下内容
 

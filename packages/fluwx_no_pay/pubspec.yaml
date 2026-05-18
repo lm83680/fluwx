@@ -1,0 +1,34 @@
+name: fluwx_no_pay
+description: >
+  WeChat SDK Flutter plugin without payment — passes App Store payment compliance review.
+  API is identical to fluwx; calling payment methods returns MissingPluginException.
+version: 6.0.0-preview.7
+homepage: https://github.com/OpenFlutter/fluwx
+
+environment:
+  sdk: ^3.11.0
+  flutter: ">=3.41.0"
+resolution: workspace
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_web_plugins:
+    sdk: flutter
+  plugin_platform_interface: ^2.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: com.jarvan.fluwx
+        pluginClass: FluwxPlugin
+      ios:
+        pluginClass: FluwxPlugin
+      ohos:
+        pluginClass: FluwxPlugin

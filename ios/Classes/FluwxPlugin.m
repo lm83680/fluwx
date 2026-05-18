@@ -71,6 +71,7 @@ NSObject <FlutterPluginRegistrar> *_fluwxRegistrar;
                                 binaryMessenger:[registrar messenger]];
     FluwxPlugin *instance = [[FluwxPlugin alloc] initWithChannel:channel];
     [registrar addApplicationDelegate:instance];
+    [registrar addSceneDelegate:instance];
     [registrar addMethodCallDelegate:instance channel:channel];
 }
 
@@ -415,14 +416,15 @@ NSObject <FlutterPluginRegistrar> *_fluwxRegistrar;
 //    return [WXApi handleOpenURL:url delegate:self];
 //}
 
+
 // Available on iOS 9.0 and later
 // See https://developer.apple.com/documentation/uikit/uiapplicationdelegate/1623112-application?language=objc
 - (BOOL)application:(UIApplication *)app
             openURL:(NSURL *)url
-             options:(NSDictionary<NSString *, id> *)options {
+            options:(NSDictionary<NSString *, id> *)options {
     // ↓ previous solution -- according to document, this may fail if the WXApi hasn't registered yet.
     // return [WXApi handleOpenURL:url delegate:self];
-    
+
     if (_isRunning) {
         // registered -- directly handle open url request by WXApi
         return [WXApi handleOpenURL:url delegate:self];
@@ -435,25 +437,21 @@ NSObject <FlutterPluginRegistrar> *_fluwxRegistrar;
         };
         // Let's hold this until the PR contributor send feedback.
         //return [url.absoluteString contains:[self fetchWeChatAppId]];
-        
+
         // simply return YES to indicate that we can handle open url request later
         return NO;
     }
 }
 
-#ifndef SCENE_DELEGATE
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray *_Nonnull))restorationHandler{
     // TODO: (if need) cache userActivity and handle it once WXApi is registered
     return [WXApi handleOpenUniversalLink:userActivity delegate:self];
 }
-#endif
 
-#ifdef SCENE_DELEGATE
 - (void)scene:(UIScene *)scene continueUserActivity:(NSUserActivity *)userActivity API_AVAILABLE(ios(13.0)) {
     // TODO: (if need) cache userActivity and handle it once WXApi is registered
     [WXApi handleOpenUniversalLink:userActivity delegate:self];
 }
-#endif
 
 - (void)handleOpenUrlCall:(FlutterMethodCall *)call
                    result:(FlutterResult)result {

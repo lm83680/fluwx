@@ -1,3 +1,27 @@
+# 6.0.0-preview.7
+* Android迁移到KTS
+
+# 6.0.0-preview.6
+* -
+
+# 6.0.0-preview.5
+* -
+
+# 6.0.0-preview.4
+* iOS迁移到Swift Package Manager
+* fluwx_no_pay又成为独立的包
+
+# 6.0.0-preview.3
+* 修复iOS编译错误
+
+# 6.0.0-preview.2
+* iOS旧的回调加回来了
+
+# 6.0.0-preview.1
+* Flutter 版本要求升级到3.38.0或更高
+* Dart 版本要求升级到3.10.0或更高
+* 支持UISceneDelegate。
+
 # 5.7.5
 * 更新：鸿蒙端支持分享文件
 * 更新：鸿蒙端支持打开客服会话
